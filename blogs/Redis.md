@@ -88,3 +88,23 @@ When you run the [**TTL command**](https://redis.io/docs/latest/commands/ttl/), 
 **Overwriting**: Using the `SET` command to overwrite a key's value will **remove** any existing TTL unless the `KEEPTTL` flag is used.
 
  **Replication**: In a Redis Cluster, only the master node handles the expiration logic. When a key expires on the master, it sends a `DEL` command to its replicas.
+
+### Redis Strings :
+
+Redis string stores sequence of characters, bytes, serialized objects(Instance of data-structure(objects) converted into linear sequence of bytes / starndardized formats like json/xml)
+
+Can also store jpeg image in string value, value shouldnt be larger than 512 mb. 
+Can use SET to set value to string - will replace the existing value if any, and GET to get value from string.
+SET key value NX - (only sets value to key if key doesnt have any value already)
+
+**The ability to set or retrieve the value of multiple keys in a single command is also useful for reduced latency**
+
+### Redis Sets:
+
+unordered collection of unique strings
+
+SDD setname value1 value2 - creates a set with value1,value2 or adds value to set if it is not already present, and returns number of values added to set
+
+SISMEMBER setname value - checks if value is present in set or not 
+
+Follow up - how every operations in redis is O(n)
