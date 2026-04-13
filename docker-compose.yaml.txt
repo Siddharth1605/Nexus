@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+
+postgres:
+build: ./postgres
+container_name: postgres_container
+restart: always
+ports:
+- "5432:5432"
+volumes:
+- postgres_data:/var/lib/postgresql/data
+environment:
+POSTGRES_DB: 
+POSTGRES_USER: 
+POSTGRES_PASSWORD: 
+
+redis:
+build: ./redis
+container_name: redis_container
+restart: always
+ports:
+- "6370:6370"
+volumes:
+- redis_data:/data
+
+volumes:
+postgres_data:
+redis_data:
