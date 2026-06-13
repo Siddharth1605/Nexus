@@ -19,7 +19,7 @@ claimrider() - to claim a rider if his status is not ON_Delivery, so orders can 
 
 We though of using `set rider:{riderid}:status ON_DELIVERY NX (atomicity)
 
-But the catch is if status is “idle” it wont work, and we are using with sprint.data.redis we are going with lua script ( for atomicity - no redis commands will execute on the server, until this script is executed completely)
+But the catch is if status is “idle” it wont work - because the value is "idle" already set so by using NX it wont be changed, and so - we are using  sprint.data.redis we are going with lua script ( for atomicity - no redis commands will execute on the server, until this script is executed completely)
 
 <img width="821" height="514" alt="week2-redis" src="https://github.com/user-attachments/assets/edd84bf2-3989-44d0-bf6c-0bd9b27f709f" />
 
@@ -30,3 +30,7 @@ But now it is O(1) : Convert to h3cell, lookup in redis set
 We are **grouping riders before order arrives**
 
 Since these values are need to be instantly avaialble , we are not putting them in db  but in redis-cache to access them fastly.
+
+ClaimRider : 
+1. First checks if rider is idle or on-deliver - If they are idle then they will be assigned with "on-delivery"
+2. After completing operation 1 successfully, will remove that rider from idle-set
