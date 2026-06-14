@@ -1,4 +1,4 @@
-package com.example.nexus.service;
+package com.example.nexus;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;

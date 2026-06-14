@@ -1,4 +1,4 @@
-package com.example.nexus.service;
+package com.example.nexus;
 import com.uber.h3core.H3Core;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
