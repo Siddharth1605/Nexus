@@ -56,6 +56,6 @@ All 6 neighbour cells are exactly at same distance.
 
 **These things matters a lot. As we are doing a ring search : First we check in our region-ring 1 : all 6 cells are at equidistant from centre cell. Then only we move to next region.** 
 
-**A secondary advantage: hexagons can tile a flat 2D surface with no gaps and no overlaps. The same is true for squares and equilateral triangles, but not for most other shapes (pentagons, octagons, circles — all leave gaps). The three shapes that tile perfectly are squares, triangles, and hexagons. Hexagons have the best equidistance property of the three, making them the natural choice.**
+**A secondary advantage: hexagons can tile a flat 2D surface with no gaps and no overlaps. The same is true for squares and equilateral triangles, but not for most other shapes (pentagons, octagons, circles — all leave gaps). The three shapes that tile perfectly are squares, triangles, and hexagons. Hexagons have the best equidistance property of the three, making them the natural choices.**
 
 ![image.png](attachment:ee5b18c9-ded0-4cf7-a37d-78cc6810f30a:image.png)
