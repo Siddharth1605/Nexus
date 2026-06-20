@@ -7,7 +7,12 @@ import org.springframework.stereotype.Service;
 public class PositionProcessor {
     @Autowired
     private H3Service h3service;
-    private RiderStateStore riderStateStore;
+    private final RiderStateStore riderStateStore;
+
+    public PositionProcessor(
+            RiderStateStore riderStateStore) {
+        this.riderStateStore = riderStateStore;
+    }
     public void updateRiderId(RiderCoordinatesDTO riderCoordinatesDTO) {
         String h3CellId = h3service.getH3Id(riderCoordinatesDTO.getLatitude(), riderCoordinatesDTO.getLongitude());
         riderStateStore.updateCell(riderCoordinatesDTO.getRiderId(), h3CellId);

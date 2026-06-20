@@ -14,7 +14,6 @@ public class LocationConsumer {
 
     @KafkaListener(topics="rider-location-co-ordinates", groupId="location-consumer-group")
     public void consume(RiderCoordinatesDTO riderCoordinatesDTO) {
-        System.out.println("Received location update for rider : " + riderCoordinatesDTO.getRiderId());
         positionProcessor.updateRiderId(riderCoordinatesDTO);
     }
 }

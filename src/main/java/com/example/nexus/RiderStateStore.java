@@ -17,14 +17,21 @@ public class RiderStateStore {
         this.redis = redis;
     }
 
+    /**
+     * Will update h3Cell of string rider:riderId:h3Cell
+     * Will remove riders from old cell's set and add in new cell's set here
+     * @param riderId
+     * @param h3CellId
+     */
     public void updateCell(String riderId, String h3CellId) {
         String cellKey = "rider:" + riderId + ":h3Cell";
-        String oldCell = redis.opsForValue().get(cellKey);
-
+        String oldCell = Objects.toString(redis.opsForValue().get(cellKey),"");
         redis.opsForValue().set(cellKey, h3CellId, TTL);
         String setKey = "idle-riders:";
-        if(!Objects.isNull(oldCell) && !oldCell.equals(h3CellId)) {
-            redis.opsForSet().remove(setKey + oldCell, riderId);
+        if(!oldCell.equals(h3CellId)) {
+            if(!oldCell.isEmpty()) {
+                redis.opsForSet().remove(setKey + oldCell, riderId);
+            }
             redis.opsForSet().add(setKey + h3CellId, riderId);
         }
     }
@@ -37,11 +44,11 @@ public class RiderStateStore {
     public void setIdle(String riderId) {
         String cellKey = "rider:" + riderId + ":status";
         redis.opsForValue().set(cellKey, "idle", TTL);
-        String currentCell = getCell(riderId);
-        if(!Objects.isNull(currentCell)) {
-            String setKey = "idle-riders:";
-            redis.opsForSet().add(setKey + currentCell, riderId);
-        }
+//        String currentCell = getCell(riderId);
+//        if(!Objects.isNull(currentCell)) {
+//            String setKey = "idle-riders:";
+//            redis.opsForSet().add(setKey + currentCell, riderId);
+//        }
     }
 
     public String claimRider(String riderId) {

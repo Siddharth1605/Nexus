@@ -5,7 +5,7 @@ public class RiderCoordinatesDTO {
     private String riderId;
     private double latitude;
     private double longitude;
-
+    public RiderCoordinatesDTO() {}
     public RiderCoordinatesDTO(String riderId, double latitude, double longitude) {
         this.riderId = riderId;
         this.latitude = latitude;
