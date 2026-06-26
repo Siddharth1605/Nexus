@@ -3,7 +3,7 @@ When your Matching Engine reads candidates from idle-riders:{cellId}, for each c
 This is the simplest to implement and the most natural fit for your project, because the cost of stale entries only matters at the moment of matching anyway. If nobody tries to match against rider 42, it does not matter that their stale ID sits in the SET for a while.
 
 Approach 2 — Redis Keyspace Notifications (more advanced, real production pattern)
-Redis can be configured to publish an event whenever a key expires. You would subscribe to these expiry events and run a cleanup handler that removes the rider from whatever idle-riders SET they were last known to be in. This is the technically complete solution, but it requires tracking which cell a rider was last in even after their primary key expires (since by the time you get the notification, you only know the key name rider:42:h3 expired, not which cell value it held).
+Redis can be configured to publish an event whenever a key expires. You would subscribe to these expiry events and run a cleanup handler that removes the rider from whatever idle-riders SET they were last known to be in. This is the technically complete solution, but it requires tracking which cell a rider was last in even after their primary key expires (since by the time you get the notification; you only know the key name rider:42:h3 expired, not which cell value it held).
 This is good to know about and mention in interviews as the production-grade approach, but heavier to implement than your project needs.
 
 Approach 3 — A periodic sweep
