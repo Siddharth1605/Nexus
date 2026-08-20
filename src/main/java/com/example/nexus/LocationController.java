@@ -20,7 +20,7 @@ public class LocationController {
     @GetMapping("/location")
     public String updateLocation(@RequestParam String riderId, @RequestParam double latitude, @RequestParam double longitude) {
         locationProducer.publishRiderId(new RiderCoordinatesDTO(riderId, latitude, longitude));
-        return "OK";
+        return "Ok";
     }
 
     @GetMapping("/claimRider")
