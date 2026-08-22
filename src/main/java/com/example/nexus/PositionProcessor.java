@@ -1,5 +1,7 @@
 package com.example.nexus;
 
+import com.example.nexus.h3.H3Service;
+import com.example.nexus.redis.RiderStateStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

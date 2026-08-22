@@ -1,7 +1,8 @@
 package com.example.nexus;
 
-import com.example.nexus.H3Service;
-import com.example.nexus.RiderStateStore;
+import com.example.nexus.h3.H3Service;
+import com.example.nexus.kafka.LocationProducer;
+import com.example.nexus.redis.RiderStateStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,9 @@ public class LocationController {
         return "Ok";
     }
 
-    @GetMapping("/claimRider")
-    public String getRider(@RequestParam String riderId) {
-        return riderStateStore.claimRider(riderId);
-    }
+
+//    @GetMapping("/claimRider")
+//    public String getRider(@RequestParam String riderId) {
+//        return riderStateStore.claimRider(riderId);
+//    }
 }

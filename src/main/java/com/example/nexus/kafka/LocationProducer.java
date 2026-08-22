@@ -1,5 +1,6 @@
-package com.example.nexus;
+package com.example.nexus.kafka;
 
+import com.example.nexus.RiderCoordinatesDTO;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 

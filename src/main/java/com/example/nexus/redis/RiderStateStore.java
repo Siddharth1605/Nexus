@@ -1,4 +1,4 @@
-package com.example.nexus;
+package com.example.nexus.redis;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class RiderStateStore {
     private final StringRedisTemplate redis;
-    private static final Duration TTL = Duration.ofSeconds(30);
+    private static final Duration TTL = Duration.ofMinutes(30);
 
     public RiderStateStore(StringRedisTemplate redis) {
         this.redis = redis;
@@ -51,14 +52,14 @@ public class RiderStateStore {
 //        }
     }
 
-    public String claimRider(String riderId) {
+    public boolean claimRider(String riderId) {
         String cellKey = "rider:" + riderId + ":status";
         String setKey = "idle-riders:";
         String luaScript = """
                 if redis.call('GET', KEYS[1]) == 'idle' then
                     redis.call('SET', KEYS[1], 'ON_DELIVERY')
                     return 1
-                else 
+                else
                     return 0
                 end
                 """;
@@ -66,12 +67,32 @@ public class RiderStateStore {
         redisScript.setScriptText(luaScript);
         redisScript.setResultType(Long.class);
         long result = redis.execute(redisScript, Collections.singletonList(cellKey));
-        if(result == 0)
-            return "Rider : " + riderId + ", Not available. Looking for others";
+        if (result == 0) {
+            System.out.println("Rider : " + riderId + ", Not available. Looking for others");
+            return false;
+        }
         String currentCell = getCell(riderId);
         if(!Objects.isNull(currentCell)) {
             redis.opsForSet().remove(setKey + currentCell, riderId);
         }
-        return "Rider : " + riderId + " is claimed";
+        System.out.println("Rider : " + riderId + " is claimed");
+        return true;
+    }
+
+    public Set<String> getIdleRiders(String h3Cell) {
+        String setKey = "idle-riders:" + h3Cell;
+        return redis.opsForSet().members(setKey);
+    }
+
+    public void removeFromIdlePool(String h3Cell, String riderId) {
+        String setKey = "idle-riders:" + h3Cell;
+        redis.opsForSet().remove(setKey,riderId);
     }
 }
+
+
+/*
+logicalissue:
+1. Putting TTL as 30 sec , but when it is deleted - why not delete from idleriderset ?
+2. When a rider is on_delivery when he/she will change again the status and now we are hitting api as rider's persepective - but rider should auto hit their location, and what will happen if they hit when they are in ON_DELIVERY
+ */

@@ -19,22 +19,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable =false)
-    private UUID id;
+    public UUID id;
 
-    private String foodName;
+    public String foodName;
 
-    private Double restaurantLat;
-
-    private Double restaurantLng;
-
-    private String restaurantH3;
+    public String restaurantH3;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    public OrderStatus status;
 
-    private LocalDateTime createdAt;
+    public LocalDateTime createdAt;
 
-    public Order() {
+    public Order(String foodName, String restaurantH3) {
+        this.foodName = foodName;
+        this.restaurantH3 = restaurantH3;
+        this.status = OrderStatus.PENDING;
+        this.createdAt = LocalDateTime.now();
     }
 
     // Getters & Setters
