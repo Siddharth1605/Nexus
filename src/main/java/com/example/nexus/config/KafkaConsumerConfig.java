@@ -1,6 +1,5 @@
 package com.example.nexus.config;
 
-
 import com.example.nexus.OrderCreatedEvent;
 import com.example.nexus.RiderCoordinatesDTO;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
