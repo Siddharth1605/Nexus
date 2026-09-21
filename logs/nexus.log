@@ -3,7 +3,7 @@
 2026-08-22T20:51:45.514+05:30  INFO 20108 --- [nexus] [restartedMain] com.example.nexus.NexusApplication       : Started NexusApplication in 14.119 seconds (process running for 15.607)
 2026-08-22T20:52:20.660+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-3] com.example.nexus.OrderController        : /restaurantDetails hit : idli, latitude: 101.65212, longitude: 701.157944
 2026-08-22T20:52:20.796+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-3] com.example.nexus.OrderService           : Order created, id: 09898b90-21f6-475d-bb4c-043ecbe11e0e, restuarntCell: 89055a60ecfffff
-2026-08-22T20:52:20.810+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-3] com.example.nexus.kafka.OrderProducer    : Order published to order-details, id: 09898b90-21f6-475d-bb4c-043ecbe11e0e
+2026-08-22T20:52:20.810+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-3] com.example.nexus.kafka.OrderProducer    : Order published toorder-details, id: 09898b90-21f6-475d-bb4c-043ecbe11e0e
 2026-08-22T20:52:20.838+05:30  INFO 20108 --- [nexus] [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] com.example.nexus.kafka.OrderConsumer    : Order consumed by kafka-consumer, id: 09898b90-21f6-475d-bb4c-043ecbe11e0e
 2026-08-22T21:10:53.251+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-5] com.example.nexus.OrderController        : /restaurantDetails hit : idli, latitude: 101.65212, longitude: 701.157944
 2026-08-22T21:10:53.366+05:30  INFO 20108 --- [nexus] [http-nio-8080-exec-5] com.example.nexus.OrderService           : Order created, id: 2b425511-a1cb-4db4-9cff-430cdc07d9b2, restuarntCell: 89055a60ecfffff
