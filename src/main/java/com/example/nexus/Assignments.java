@@ -20,7 +20,7 @@ public class Assignments {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "rider_id")
     private Rider rider;
 
